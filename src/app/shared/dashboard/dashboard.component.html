@@ -1,4 +1,3 @@
-
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-5">
@@ -6,37 +5,37 @@
                 <div class="card-body">
                     <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
                         <div class="mb-4">
-                            <label for="userName" class="form-label fw-semibold">
-                                Username
-                            </label>
+                            <label for="userName" class="form-label"> Username </label>
 
-                            <input id="userName" type="text" class="form-control form-control-lg"
-                                formControlName="userName" placeholder="Enter username" />
+                            <input type="text" class="form-control form-control-lg" formControlName="userName"
+                                placeholder="Enter username" />
 
-                            <div class="text-danger small mt-2"
+                            <strong class="text-danger small mt-2"
                                 *ngIf="userName.hasError('required') && userName.touched">
                                 Username is required
-                            </div>
+                            </strong>
+                            <ng-container>
+                                <strong class="text-danger small mt-2"
+                                    *ngIf="userName.hasError('minlength') && userName.dirty">
+                                    Minimum
+                                    {{ userName.errors?.["minlength"].requiredLength }}
+                                    characters required
+                                </strong>
 
-                            <div class="text-danger small mt-2"
-                                *ngIf="userName.hasError('minlength') && userName.dirty">
-                                Minimum
-                                {{ userName.errors?.["minlength"].requiredLength }}
-                                characters required
-                            </div>
-
-                            <div class="text-danger small mt-2"
-                                *ngIf="userName.hasError('maxlength') && userName.dirty">
-                                Maximum
-                                {{ userName.errors?.["maxlength"].requiredLength }}
-                                characters allowed
-                            </div>
+                                <strong class="text-danger small mt-2" *ngIf="userName.hasError('pattern')">
+                                    UserName should includes letters only (numbers and spec
+                                    characters are not allowed!!!)
+                                </strong>
+                                <strong class="text-danger small mt-2" *ngIf="userName.hasError('noSpaceVal')">
+                                    Username must not contain spaces
+                                </strong>
+                            </ng-container>
                         </div>
 
-                        <div class="mb-4">
-                            <label for="email" class="form-label fw-semibold"> Email </label>
+                        <div class="mb-4 form-group">
+                            <label for="email" class="form-label"> Email </label>
 
-                            <input id="email" type="email" class="form-control form-control-lg" formControlName="email"
+                            <input type="email" class="form-control form-control-lg" formControlName="email"
                                 placeholder="Enter email" />
 
                             <div class="text-danger small mt-2" *ngIf="email.hasError('required') && email.touched">
